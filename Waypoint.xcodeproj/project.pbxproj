@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B08DDA5231DEFE1002B3E54 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B08DDA4231DEFE1002B3E54 /* LocationManager.swift */; };
 		2B0C386F23195C3500F3CD90 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0C386E23195C3500F3CD90 /* AppDelegate.swift */; };
 		2B0C387123195C3500F3CD90 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0C387023195C3500F3CD90 /* SceneDelegate.swift */; };
 		2B0C387323195C3500F3CD90 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0C387223195C3500F3CD90 /* ContentView.swift */; };
@@ -35,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2B08DDA4231DEFE1002B3E54 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		2B0C386B23195C3500F3CD90 /* Waypoint.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Waypoint.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B0C386E23195C3500F3CD90 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2B0C387023195C3500F3CD90 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 				2B0C387923195C3600F3CD90 /* LaunchScreen.storyboard */,
 				2B0C387C23195C3600F3CD90 /* Info.plist */,
 				2B0C387623195C3600F3CD90 /* Preview Content */,
+				2B08DDA4231DEFE1002B3E54 /* LocationManager.swift */,
 			);
 			path = Waypoint;
 			sourceTree = "<group>";
@@ -267,6 +270,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2B08DDA5231DEFE1002B3E54 /* LocationManager.swift in Sources */,
 				2B0C386F23195C3500F3CD90 /* AppDelegate.swift in Sources */,
 				2B0C387123195C3500F3CD90 /* SceneDelegate.swift in Sources */,
 				2B0C387323195C3500F3CD90 /* ContentView.swift in Sources */,
@@ -436,6 +440,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "Waypoint/Preview\\ Content";
+				DEVELOPMENT_TEAM = RGG45D58Q7;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Waypoint/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -455,6 +460,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "Waypoint/Preview\\ Content";
+				DEVELOPMENT_TEAM = RGG45D58Q7;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Waypoint/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
