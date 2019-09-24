@@ -6,40 +6,41 @@
 //  Copyright © 2019 Edward Bennett. All rights reserved.
 //
 
-//import Foundation
 import CoreLocation
+
+class LocationManagerVO: ObservableObject {
+    @Published var heading: String = ""
+}
 
 class LocationManager: NSObject {
     let compassPoints = ["N", "NE", "E", "SE", "S", "SW", "W", "NW", "N"]
-    private let locationManager: CLLocationManager
-    var heading = "unsupported"
+    
+    private var locationManager: CLLocationManager?
+    var locationManagerVO = LocationManagerVO()
+    
     var lastLocation = ""
     
-    init(locationManager: CLLocationManager = CLLocationManager()) {
-        self.locationManager = locationManager
-        self.locationManager.requestWhenInUseAuthorization()
+    override init() {
         super.init()
+        
+        locationManager = CLLocationManager()
+        locationManager?.delegate = self
+        locationManager?.requestWhenInUseAuthorization()
     }
     
     func startUpdatingHeading() {
-        guard locationManager.delegate != nil else { return }
-        
-        locationManager.headingFilter = 5
-        locationManager.startUpdatingHeading()
+        locationManager?.headingFilter = 5
+        locationManager?.startUpdatingHeading()
     }
-    
+
     func stopUpdatingHeading() {
-        locationManager.stopUpdatingHeading()
+        locationManager?.stopUpdatingHeading()
     }
-    
+
     func requestLocation() {
-        locationManager.requestLocation()
+        locationManager?.requestLocation()
     }
-    
-    func setLocationManagerDelegate(_ delegate: CLLocationManagerDelegate) {
-        locationManager.delegate = delegate
-    }
-    
+
     func getDirection(heading: CLLocationDirection) -> String {
         let index = Int((heading + 23) / 45)
         return compassPoints[index]
@@ -52,8 +53,8 @@ class LocationManager: NSObject {
 extension LocationManager: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
         if newHeading.headingAccuracy >= 0 {
-            heading = getDirection(heading: newHeading.magneticHeading)
-            print("didUpdateHeading - new heading: \(newHeading)")
+            locationManagerVO.heading = getDirection(heading: newHeading.magneticHeading)
+            print("didUpdateHeading - new heading: \(locationManagerVO.heading)")
         }
     }
     

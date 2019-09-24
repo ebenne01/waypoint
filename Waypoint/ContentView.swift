@@ -7,18 +7,21 @@
 //
 
 import SwiftUI
-import CoreLocation
 
 struct ContentView : View {
     static let space = " "
+    
+    @ObservedObject var locationManagerVO: LocationManagerVO
     @State var isTracking = false
     @State var waypoint = space
     
-    var locationManager: LocationManager
+    init(_ locationManagerVO: LocationManagerVO) {
+        self.locationManagerVO = locationManagerVO
+    }
     
     var body: some View {
         VStack {
-            Text("Heading")
+            Text(self.locationManagerVO.heading)
                 .font(.title)
                 .padding()
                 .background(Color.red)
@@ -38,10 +41,6 @@ struct ContentView : View {
         }
     }
     
-    init(locationManager: LocationManager) {
-        self.locationManager = locationManager
-    }
-    
     func setWaypoint() -> Void {
         if isTracking {
             waypoint = ContentView.space
@@ -55,7 +54,7 @@ struct ContentView : View {
 #if DEBUG
 struct ContentView_Previews : PreviewProvider {
     static var previews: some View {
-        ContentView(locationManager: LocationManager())
+        ContentView(LocationManagerVO())
     }
 }
 #endif
