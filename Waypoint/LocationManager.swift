@@ -9,7 +9,7 @@
 import CoreLocation
 
 class LocationManagerVO: ObservableObject {
-    @Published var heading: String = ""
+    @Published var heading: String = "N"
 }
 
 class LocationManager: NSObject {

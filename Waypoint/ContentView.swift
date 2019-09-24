@@ -9,22 +9,17 @@
 import SwiftUI
 
 struct ContentView : View {
-    static let space = " "
+    var locationManager: LocationManager
     
     @ObservedObject var locationManagerVO: LocationManagerVO
     @State var isTracking = false
-    @State var waypoint = space
-    
-    init(_ locationManagerVO: LocationManagerVO) {
-        self.locationManagerVO = locationManagerVO
-    }
+    @State var waypoint = " "
     
     var body: some View {
         VStack {
             Text(self.locationManagerVO.heading)
                 .font(.title)
                 .padding()
-                .background(Color.red)
             Text(waypoint)
                 .background(Color.green)
             Spacer()
@@ -41,9 +36,14 @@ struct ContentView : View {
         }
     }
     
+    init(_ locationManager: LocationManager) {
+        self.locationManager = locationManager
+        self.locationManagerVO = locationManager.locationManagerVO
+    }
+
     func setWaypoint() -> Void {
         if isTracking {
-            waypoint = ContentView.space
+            waypoint = " "
         } else {
             waypoint = "Tracking"
         }
@@ -54,7 +54,7 @@ struct ContentView : View {
 #if DEBUG
 struct ContentView_Previews : PreviewProvider {
     static var previews: some View {
-        ContentView(LocationManagerVO())
+        ContentView(LocationManager())
     }
 }
 #endif
