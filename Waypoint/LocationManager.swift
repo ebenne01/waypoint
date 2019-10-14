@@ -10,6 +10,7 @@ import CoreLocation
 
 class LocationManagerVO: ObservableObject {
     @Published var heading: String = "N"
+    @Published var waypoint = " "
 }
 
 class LocationManager: NSObject {
@@ -17,8 +18,7 @@ class LocationManager: NSObject {
     
     private var locationManager: CLLocationManager?
     var locationManagerVO = LocationManagerVO()
-    
-    var lastLocation = ""
+    var markedLocation: CLLocation?
     
     override init() {
         super.init()
@@ -45,22 +45,37 @@ class LocationManager: NSObject {
         let index = Int((heading + 23) / 45)
         return compassPoints[index]
     }
+    
+    func clearWaypoint() {
+        locationManagerVO.waypoint = " "
+    }
+    
+    func setWaypoint(_ location: CLLocation) {
+        if markedLocation == nil {
+            markedLocation = location
+            let latitudeInDegMinSec = convertLatitudeToDegreesMinutesSeconds(location.coordinate.latitude)
+            let longitudeInDegMinSec = convertLongitudeToDegreesMinutesSeconds(location.coordinate.longitude)
+            locationManagerVO.waypoint = "\(latitudeInDegMinSec), \(longitudeInDegMinSec)"
+        }
+    }
 }
 
 //
 // MARK: - CLLocationManagerDelegate
 //
 extension LocationManager: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        fatalError()
+    }
     func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
         if newHeading.headingAccuracy >= 0 {
             locationManagerVO.heading = getDirection(heading: newHeading.magneticHeading)
-            print("didUpdateHeading - new heading: \(locationManagerVO.heading)")
         }
     }
     
-//    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-//        if let lastLocation = locations.last {
-//            self.lastLocation = lastLocation
-//        }
-//    }
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let lastLocation = locations.last {
+            setWaypoint(lastLocation)
+        }
+    }
 }

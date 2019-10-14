@@ -30,5 +30,28 @@ class WaypointTests: XCTestCase {
             // Put the code you want to measure the time of here.
         }
     }
-
+    
+    func testConvertLatitudeToDegreesMinutesSecondsWhenNorth() {
+        let expected = "40° 44' 30\" N"
+        let actual = convertLatitudeToDegreesMinutesSeconds(40.741895)
+        XCTAssertEqual(expected, actual)
+    }
+    
+    func testConvertLatitudeToDegreesMinutesSecondsWhenSouth() {
+        let expected = "40° 44' 30\" S"
+        let actual = convertLatitudeToDegreesMinutesSeconds(-40.741895)
+        XCTAssertEqual(expected, actual)
+    }
+    
+    func testConvertLongitudeToDegreesMinutesSecondsWhenEast() {
+        let expected = "73° 59' 21\" E"
+        let actual = convertLongitudeToDegreesMinutesSeconds(73.989308)
+        XCTAssertEqual(expected, actual)
+    }
+    
+    func testConvertLongitudeToDegreesMinutesSecondsWhenWest() {
+        let expected = "73° 59' 21\" W"
+        let actual = convertLongitudeToDegreesMinutesSeconds(-73.989308)
+        XCTAssertEqual(expected, actual)
+    }
 }

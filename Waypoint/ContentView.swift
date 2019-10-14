@@ -13,15 +13,13 @@ struct ContentView : View {
     
     @ObservedObject var locationManagerVO: LocationManagerVO
     @State var isTracking = false
-    @State var waypoint = " "
     
     var body: some View {
         VStack {
             Text(self.locationManagerVO.heading)
                 .font(.title)
                 .padding()
-            Text(waypoint)
-                .background(Color.green)
+            Text(locationManagerVO.waypoint)
             Spacer()
             Text("90")
                 .font(.system(size: 120))
@@ -43,9 +41,9 @@ struct ContentView : View {
 
     func setWaypoint() -> Void {
         if isTracking {
-            waypoint = " "
+            locationManager.clearWaypoint()
         } else {
-            waypoint = "Tracking"
+            locationManager.requestLocation()
         }
         self.isTracking.toggle()
     }
